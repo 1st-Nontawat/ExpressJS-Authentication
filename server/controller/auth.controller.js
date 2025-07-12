@@ -1,12 +1,22 @@
-export const register = (req, res) => {
+export const register = async (req, res) => {
  try {
 
-    // if(true) {
-    //     CreateError(500, 'User already exists');
-    // }
+    
 
+    
     const { email, username, password } = req.body;
     console.log(email, username, password);
+
+    const user = await prisma.user.findFirst({
+        where: {
+            email: email,
+        },
+    });
+
+    if (user) {
+        createError(400, 'User already exists');
+    }
+    console.log(user);
 
     res.json({
         message: 'User registered successfully',
