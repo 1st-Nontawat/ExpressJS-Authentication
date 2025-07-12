@@ -3,7 +3,7 @@ const router = express.Router();
 
 // controller
 import { register, login } from '../controller/auth.controller.js';
-import { Validate, registerSchema } from '../utils/validator.js';
+import { Validate, registerSchema, loginSchema } from '../utils/validator.js';
 
 
 
@@ -13,9 +13,6 @@ import { Validate, registerSchema } from '../utils/validator.js';
 router.post('/register', Validate(registerSchema), register);
 
 // Endpoint  http://localhost:8000/auth/login
-router.post('/login', login);
-
-   
-
+router.post('/login', Validate(loginSchema), login);
 
 export default router;

@@ -2,11 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import authRoutes from './routes/auth.route.js';
+import dotenv from 'dotenv';
 
 
 
 const app = express();
-
+dotenv.config();
 
 // Middleware
 app.use(cors());

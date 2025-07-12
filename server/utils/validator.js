@@ -7,6 +7,11 @@ const registerSchema = object({
     password: string().required("Password is required").min(6).max(20),
 });
 
+const loginSchema = object({
+    email: string().email("Invalid email format").required("Email is required").max(50),
+    password: string().required("Password is required").min(6).max(20),
+});
+
 const Validate = (schema) => async (req, res, next) => {
   try {
     await schema.validate(req.body, { abortEarly: false });
@@ -18,4 +23,7 @@ const Validate = (schema) => async (req, res, next) => {
   }
 };
 
-export { registerSchema, Validate };
+
+
+
+export { registerSchema, loginSchema, Validate };
