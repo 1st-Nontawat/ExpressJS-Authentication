@@ -11,11 +11,18 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(morgan('dev'));
+app.use(express.json());
 
 
 // routing
 
 app.use('/auth', authRoutes);
+
+// Error handling
+app.use((err, req, res, next) => {
+    // console.error(err);
+    res.status(err.code || 500).json({ message: err.message || 'Internal Server Error' });
+});
 
 const PORT = 8000;
 
